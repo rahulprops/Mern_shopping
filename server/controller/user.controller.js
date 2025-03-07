@@ -1,6 +1,7 @@
 import userModel from "../models/user.model.js";
 import bcrypt from 'bcrypt'
 import validator from 'validator'
+import generateToken from "../config/generateToken.js";
 //! user register
 export const register =async (req,res)=>{
     const {name,email,password}=req.body;
@@ -31,6 +32,7 @@ export const register =async (req,res)=>{
            })
            if(user){
                 await user.save()
+                await generateToken(res,user._id)
                 return res.status(201).json({
                     message:"user create sucessful",
                     data:user
@@ -71,6 +73,7 @@ export const login =async (req,res)=>{
         // check password
         const checkPass=await bcrypt.compare(password ,isUser.password)
         if(checkPass){
+            await generateToken(res,isUser._id)
             return res.status(200).json({
                 message:"login sucessful"
             })
