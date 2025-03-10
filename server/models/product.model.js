@@ -1,4 +1,4 @@
-import mongoose, { Model, Schema } from "mongoose";
+import mongoose, {  Model, Schema } from "mongoose";
 
 const productSchema=new Schema({
     name:{
@@ -91,3 +91,6 @@ const productSchema=new Schema({
     },
     weight:Number
 },{timestamps:true})
+
+const productModel=Model("product",productSchema)
+export default productModel;

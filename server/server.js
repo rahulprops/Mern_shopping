@@ -5,6 +5,7 @@ import dbConnection from './config/db.js';
 import userRouter from './routers/user.router.js';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import productRouter from './routers/product.router.js';
 
 const app=express()
 const port=process.env.PORT || 3000;
@@ -15,6 +16,7 @@ app.use(cookieParser())
 
 //! apis
 app.use("/api/user",userRouter)
+app.use("/api/product",productRouter)
 
 //! server start
 app.listen(port ,()=>{
